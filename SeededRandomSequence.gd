@@ -33,7 +33,7 @@ func reset(new_seed=null):
 	
 	#Get the first state
 	self._result_sequence = []
-	self._current_state = rand_seed(self._initial_seed)[1]
+	self._current_state = rand_seed(hash(self._initial_seed))[1]
 
 #Get the next number
 func next():

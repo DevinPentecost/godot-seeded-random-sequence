@@ -24,7 +24,7 @@ For Example:
 const SeededRandomSequence = preload("res://lib/SeededRandomSequence.gd")
 
 #Variables for the seed and RNG
-export(int) var seed = 0
+export(String) var seed = 0
 var _rng
 
 func _ready():
