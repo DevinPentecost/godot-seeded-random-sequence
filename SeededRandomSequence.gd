@@ -31,9 +31,12 @@ func reset(new_seed=null):
 		#Set that seed
 		self._initial_seed = new_seed
 	
+	#Hash the seed to support non-integers
+	var hashed_seed = hash(self._initial_seed)
+	
 	#Get the first state
 	self._result_sequence = []
-	self._current_state = rand_seed(hash(self._initial_seed))[1]
+	self._current_state = rand_seed(hashed_seed)[1]
 
 #Get the next number
 func next():
