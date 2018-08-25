@@ -57,7 +57,7 @@ func get_at_index(index):
 	#Note: This WILL update the sequence to that index if it is further than the current index!
 	
 	#We need to generate numbers until we get to this index
-	while index > self._result_sequence.size():
+	while index >= self._result_sequence.size():
 		#We need to keep generating more
 		self.next()
 	
