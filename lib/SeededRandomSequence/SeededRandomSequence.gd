@@ -65,3 +65,48 @@ func get_at_index(index):
 	#We can return it's result
 	return self._result_sequence[index]
 
+func save_state():
+	#Save the current state of the sequence to a JSON string
+	#You would then save this to disk, etc.
+
+	#Store various variables
+	var state = {}
+	state['initial_seed'] = self._initial_seed
+	state['current_state'] = str(self._current_state)
+
+	#Get the JSON string
+	var json = JSON.print(state, ' ', false)
+	return json
+
+func load_state(json_state):
+	#Load a JSON state, generated from the save_state function
+	#WARNING: If this is not a 'valid' state, this process will take an ~infinite amount of time until it reaches the state. Don't feed invalid data!
+
+	#Re-initialize with the previous state
+	var json_result = JSON.parse(json_state)
+	var json_data = json_result.result
+
+	#Did it parse the result properly?
+	if typeof(json_data) != TYPE_DICTIONARY:
+		#Invalid result
+		print("Unable to load JSON state!")
+		print(json_result.error_string)
+		return
+	
+	
+	var previous_seed = json_data['initial_seed']
+	self._init(previous_seed)
+	var c  =0
+	#Now start getting values until the state matches the previous one
+	var previous_state = json_data['current_state']
+	print('PREV ', previous_state, ' ', float(previous_state), ' ', str(previous_state))
+	print(str(self._current_state))
+	while str(self._current_state) != previous_state and c < 100:
+
+		#Get the next value
+		print(c, ' ', self._current_state, ' ', previous_state)
+		self.next()
+		c = c + 1
+
+	#At this point, we've restored the state to the previous version!
+	return

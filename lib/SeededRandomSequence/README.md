@@ -17,6 +17,13 @@ For Example:
        └── MyObjectController.gd
 ```
 
+You can save the state of the SRS by calling .save_state(), which will return the JSON string that represents the RNG.
+You can restore this state by calling .load_state(json) with the JSON string. This will use the initial seed to simulate the RNG until it returns to the state described in the JSON.
+This is useful for recovering the RNG across sessions, for example a save game or a replay system. Be warned, if you feed it bad data, it could lock up 'indefinitely' as it tries to find the matching state value.
+Since the state is stored internally as a 64bit integer, it could search for a long time before it hits the desired state.
+
+After loading the state, you can then proceed to use it like normal, getting the next number with .next()
+
 ### MyObjectController.gd
 ```
 ...
@@ -35,3 +42,7 @@ func _ready():
   var my_new_int = _rng.next()
   print("Got Number: ", my_new_int)
 ```
+
+### Example Project
+There is a provided Example Project in the repo. You can load it in Godot to see a simple GUI that allows you to set the seed, get the values, watch the state, and even save/load the JSON to show that it works!
+The example is shown in the /lib/example/ folder.
