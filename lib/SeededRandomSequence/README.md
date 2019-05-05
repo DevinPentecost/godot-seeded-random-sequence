@@ -43,6 +43,26 @@ func _ready():
   print("Got Number: ", my_new_int)
 ```
 
+## As a Singleton
+There is a simple Singleton script included in this package, called SeededRandomSingleton. This Singleton simply creates and initializes a SeededRandomSequence object.
+You can add this Singleton to your project via:
+
+```
+Project
+ └── Project Settings
+     └── AutoLoad
+```
+
+and selecting the SeededRandomSingleton.gd script. Assuming you named the Autoload `SeededRandomSingleton` then you can simply access it in your scripts like:
+
+```
+SeededRandomSingleton.sequence.reset(new_seed) #Optional, if you want to control the seed
+var value = SeededRandomSingleton.sequence.next() #Grab the next value
+print(value) #Print out the value
+```
+
+It's a very easy way to take advantage of the sequence without needing to pass around an object.
+
 ### Example Project
 There is a provided Example Project in the repo. You can load it in Godot to see a simple GUI that allows you to set the seed, get the values, watch the state, and even save/load the JSON to show that it works!
 The example is shown in the /lib/example/ folder.
