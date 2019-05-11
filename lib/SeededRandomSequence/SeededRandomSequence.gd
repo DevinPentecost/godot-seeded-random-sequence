@@ -23,8 +23,13 @@ func _init(new_seed=null):
 	self.reset(new_seed)
 
 #Reset to the original state
-func reset(new_seed=null):
+func reset(new_seed=null, hard=false):
 	#Reset the sequence, optionally with a new seed
+	
+	#If a hard reset, ignore seeds and get a new one
+	if hard:
+		randomize()
+		new_seed = randi()
 
 	#Was there a new seed?
 	if new_seed != null:
